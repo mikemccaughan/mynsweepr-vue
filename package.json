@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@babel/core": "^7.18.13",
     "@babel/eslint-parser": "^7.16.3",
     "ansi-regex": "^5.0.1",
     "core-js": "^3.19.3",
@@ -51,5 +52,6 @@
   "resolutions": {
     "glob-parent": "^5.1.2",
     "ansi-regex": "^5.0.1"
-  }
+  },
+  "packageManager": "yarn@3.2.3"
 }

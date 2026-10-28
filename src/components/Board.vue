@@ -37,7 +37,7 @@ export default {
     needsRebuild: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   watch: {
     dimensions(newValue, oldValue) {
@@ -68,7 +68,10 @@ export default {
       return this.cells;
     },
     remaining() {
-      return this.cells.filter(cell => cell.mine && cell.hidden && !cell.flag).length - this.cells.filter(cell => cell.flag).length;
+      return (
+        this.cells.filter((cell) => cell.mine && cell.hidden && !cell.flag).length -
+        this.cells.filter((cell) => cell.flag).length
+      );
     },
   },
   components: { Cell },
@@ -77,7 +80,7 @@ export default {
   },
   methods: {
     load() {
-      this.$emit('board-building');
+      this.$emit("board-building");
       this.size = JSON.parse(this.$props.dimensions);
       const mineCount = this.size.width * this.size.height * this.density;
       const isBetween = function (value, min, max) {

@@ -3,30 +3,48 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "yarn exec vue-cli-service serve",
+    "lint": "yarn exec vue-cli-service lint",
+    "update:yarn": "yarn set version latest && yarn dlx npm-check-updates -u && yarn install",
+    "update:browserslist": "yarn dlx -p browserslist -p update-browserslist-db update-browserslist-db",
+    "build": "yarn exec vue-cli-service build",
+    "build:deploy:fs": "rm -r ../publish/mynsweepr-vue/ && cp -r dist/ ../publish/mynsweepr-vue/",
+    "build:deploy": "yarn run update:yarn && yarn run update:browserslist && yarn run build && yarn run build:deploy:fs"
   },
   "dependencies": {
-    "ansi-regex": "^5.0.1",
-    "core-js": "^3.25.0",
-    "eslint": "^8.23.0",
-    "eslint-plugin-vue": "^8.7.1",
-    "glob-parent": "^5.1.2",
-    "serialize-javascript": "^6.0.0",
-    "vue": "^3.2.38",
-    "vue-router": "^4.1.5",
-    "vuex": "^4.0.2"
+    "ansi-regex": "^6.3.0",
+    "core-js": "^3.50.0",
+    "eslint": "^10.11.0",
+    "eslint-plugin-vue": "^10.11.0",
+    "glob-parent": "^6.0.2",
+    "serialize-javascript": "^7.1.1",
+    "vue": "^3.5.43",
+    "vue-router": "^5.3.1",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^5.0.8",
-    "@vue/cli-plugin-router": "^5.0.8",
-    "@vue/cli-plugin-vuex": "^5.0.8",
-    "@vue/cli-service": "^5.0.8",
-    "@vue/compiler-sfc": "^3.2.38"
+    "@babel/core": "^8.0.6",
+    "@babel/helper-compilation-targets": "^8.0.6",
+    "@babel/plugin-syntax-jsx": "^8.0.1",
+    "@vue/babel-plugin-jsx": "^3.0.0",
+    "@vue/cli-plugin-babel": "^5.0.9",
+    "@vue/cli-plugin-router": "^5.0.9",
+    "@vue/cli-plugin-vuex": "^5.0.9",
+    "@vue/cli-service": "^5.0.9",
+    "@vue/compiler-sfc": "^3.5.43",
+    "browserslist": "^4.29.0",
+    "update-browserslist-db": "^1.3.3",
+    "vue-eslint-parser": "^10.4.1"
   },
+  "overrides": {
+    "ansi-regex": "ansi-regex$",
+    "glob-parent": "glob-parent$"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
   "eslintConfig": {
-    "root": true,
     "env": {
       "node": true
     },
@@ -36,20 +54,13 @@
     ],
     "parserOptions": {
       "parser": "babel-eslint"
-    }
+    },
+    "root": true
   },
+  "packageManager": "yarn@4.18.0",
   "postcss": {
     "plugins": {
       "autoprefixer": {}
     }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ],
-  "resolutions": {
-    "glob-parent": "^5.1.2",
-    "ansi-regex": "^5.0.1"
-  },
-  "packageManager": "yarn@3.2.3"
+  }
 }

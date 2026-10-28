@@ -1,13 +1,9 @@
 {
-    "include": [
-        "./src/**/*"
-    ],
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "components/*": [
-                "src/components/*"
-            ]
-        }
+  "include": ["./src/**/*"],
+  "exclude": ["./src/router/index.js", "./src/store/index.js"],
+  "compilerOptions": {
+    "paths": {
+      "components/*": ["./src/components/*"]
     }
+  }
 }

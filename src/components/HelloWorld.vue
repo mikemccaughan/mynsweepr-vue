@@ -1,11 +1,7 @@
 <template>
   <main class="minesweeper">
     <Processing :isProcessing="isProcessing" />
-    <Difficulty
-      :difficulty="difficulty"
-      :size="size"
-      @difficulty-changed="onDifficultyChanged"
-    />
+    <Difficulty :difficulty="difficulty" :size="size" @difficulty-changed="onDifficultyChanged" />
     <Scoreboard
       :total-mines="totalMines"
       :remaining="remaining"
@@ -35,9 +31,7 @@
       <template #header>You Lost!</template>
       <template><p>You triggered a mine and exploded.</p></template>
       <template #footer
-        ><button type="button" @click="closeDialog('lost')">
-          Bummer
-        </button></template
+        ><button type="button" @click="closeDialog('lost')">Bummer</button></template
       >
     </Dialog>
     <Dialog
@@ -51,9 +45,7 @@
       <template #header>You Won!</template>
       <template><p>You found all the mines and cleared the field.</p></template>
       <template #footer
-        ><button type="button" @click="closeDialog('won')">
-          Awesome!
-        </button></template
+        ><button type="button" @click="closeDialog('won')">Awesome!</button></template
       >
     </Dialog>
   </main>
@@ -101,17 +93,13 @@ export default {
       this.isProcessing = true;
       this.difficulty = +data.difficulty;
       this.size = data.size;
-      this.remaining = Math.floor(
-        data.size.height * data.size.width * this.density
-      );
+      this.remaining = Math.floor(data.size.height * data.size.width * this.density);
       this.board = JSON.stringify({
         cells: this.cells.sort((a, b) => a.index - b.index),
         size: this.size,
         density: this.density,
       });
-      this.totalMines = Math.floor(
-        data.size.width * data.size.height * this.density
-      );
+      this.totalMines = Math.floor(data.size.width * data.size.height * this.density);
       const docEl = document.documentElement;
       docEl.style.setProperty("--size-mine", `${data.mineSize}px`);
       docEl.style.setProperty("--size-icon", `${data.mineSize - 12}px`);
@@ -175,9 +163,7 @@ export default {
             (!nextCell.flag || showMines)
           ) {
             board = this.showCell({ cell: nextCell, board });
-            alteredCells.push(
-              board.cells.find((c) => c.index === nextCell.index)
-            );
+            alteredCells.push(board.cells.find((c) => c.index === nextCell.index));
           }
         }
       }
@@ -280,11 +266,11 @@ export default {
       console.log(`mynsweepr: cell-reveal`, JSON.stringify(data));
       this.isProcessing = true;
       const cell = this.addPropertiesToCell(
-        JSON.parse(JSON.stringify(data.cell, this.boardReplacer))
+        JSON.parse(JSON.stringify(data.cell, this.boardReplacer)),
       );
       const reviver = this.boardReviver.bind(this);
       let board = this.addPropertiesToBoard(
-        JSON.parse(JSON.stringify(data.board, this.boardReplacer), reviver)
+        JSON.parse(JSON.stringify(data.board, this.boardReplacer), reviver),
       );
       board = this.showCell({ cell, board });
       this.remaining = board.remaining;
@@ -296,11 +282,11 @@ export default {
       console.log(`mynsweepr: cell-reveal-nearby`, JSON.stringify(data));
       this.isProcessing = true;
       const cell = this.addPropertiesToCell(
-        JSON.parse(JSON.stringify(data.cell, this.boardReplacer))
+        JSON.parse(JSON.stringify(data.cell, this.boardReplacer)),
       );
       const reviver = this.boardReviver.bind(this);
       let board = this.addPropertiesToBoard(
-        JSON.parse(JSON.stringify(data.board, this.boardReplacer), reviver)
+        JSON.parse(JSON.stringify(data.board, this.boardReplacer), reviver),
       );
       board = this.clearAround({ cell, board });
       this.remaining = board.remaining;
@@ -312,16 +298,14 @@ export default {
       console.log(`mynsweepr: cell-flag`, JSON.stringify(data));
       this.isProcessing = true;
       const cell = this.addPropertiesToCell(
-        JSON.parse(JSON.stringify(data.cell, this.boardReplacer))
+        JSON.parse(JSON.stringify(data.cell, this.boardReplacer)),
       );
       const reviver = this.boardReviver.bind(this);
       let board = this.addPropertiesToBoard(
-        JSON.parse(JSON.stringify(data.board, this.boardReplacer), reviver)
+        JSON.parse(JSON.stringify(data.board, this.boardReplacer), reviver),
       );
       if (cell && !cell.hidden) {
-        console.warn(
-          `attempt made to flag unhidden cell at index ${cell.index}`
-        );
+        console.warn(`attempt made to flag unhidden cell at index ${cell.index}`);
       }
       if (cell && cell.hidden) {
         cell.flag = !cell.flag;
@@ -362,8 +346,9 @@ html {
 }
 
 body {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+    sans-serif;
 }
 h3 {
   margin: 40px 0 0;

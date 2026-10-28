@@ -2,9 +2,7 @@
   <dialog :id="id" :class="klasses">
     <header class="dialog-header">
       <slot name="header"></slot>
-      <button type="button" v-if="hasClose" class="close" @click="close()">
-        ✖
-      </button>
+      <button type="button" v-if="hasClose" class="close" @click="close()">✖</button>
     </header>
     <main class="dialog-content">
       <slot></slot>
@@ -83,8 +81,7 @@ export default {
   },
   computed: {
     klasses() {
-      let arr =
-        this.$props.classes?.split(" ")?.filter((s) => s && s.length) ?? [];
+      let arr = this.$props.classes?.split(" ")?.filter((s) => s && s.length) ?? [];
       arr = [...arr, "dialog"];
       if (this.isOpen) {
         arr.push("show");

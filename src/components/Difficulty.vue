@@ -113,9 +113,9 @@ export default {
       this.mineSize = Math.max(
         Math.min(
           (window.innerHeight - 160) / this.size.height,
-          (window.innerWidth - 160) / this.size.width
+          (window.innerWidth - 160) / this.size.width,
         ),
-        18
+        18,
       );
       this.$nextTick(() => {
         this.$emit("difficulty-changed", this.$data);

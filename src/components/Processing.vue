@@ -3,12 +3,7 @@
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
-      style="
-        margin: auto;
-        background: rgb(255, 255, 255);
-        display: block;
-        shape-rendering: auto;
-      "
+      style="margin: auto; background: rgb(255, 255, 255); display: block; shape-rendering: auto"
       width="230px"
       height="230px"
       viewBox="0 0 100 100"
